@@ -12,8 +12,8 @@ class PistolsSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        #for pistol in response.css('table'):
-         #   if pistol.css('div[text="Self-Loading"]'):
+        for pistol in response.css('table'):
+            if pistol.css('tbody tr th div[text="Self-Loading"]'):
                 yield {
-                    'name' : response.css('div.gallerytext p a::text').getall()
+                    'name' : pistol.css('div.gallerytext p a::text').getall()
                 }
